@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig');
 
 async function getProjects() {
-    const projects = await db('projects as p')
+    const projects = await db('projects')
 
     projects.forEach(row => {
         row.project_completed = 
