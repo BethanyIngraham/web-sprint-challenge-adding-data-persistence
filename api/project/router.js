@@ -12,11 +12,22 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
+        const {project_name, project_description, project_completed} = req.body;
+
+        const projectObj = {
+            project_name: project_name,
+            project_description: project_description,
+            project_completed: 
+                project_completed !== undefined ? (project_completed ? 1 : 0) : 0
+        };
+
+        const createdProject = await Projects.createProject(projectObj);
+        res.status(201).json(createdProject);
 
     } catch(err) {
-
+        next(err);
     }
 });
 
