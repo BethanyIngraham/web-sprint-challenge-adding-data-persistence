@@ -1,8 +1,8 @@
 const db = require('../../data/dbConfig');
 
 async function getProjects() {
-   
-    const projects = await db('projects as p');
+    const projects = await db('projects as p')
+
     projects.forEach(row => {
         row.project_completed = 
         row.project_completed === 1 ?
@@ -13,7 +13,6 @@ async function getProjects() {
 }
 
 async function createProject(projectObj) {
-   
     const [project_id] = await db('projects').insert(projectObj)
 
     const project = await db('projects')
