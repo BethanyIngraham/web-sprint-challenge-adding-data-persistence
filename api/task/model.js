@@ -18,8 +18,19 @@ async function getTasks() {
     return tasks
 }
 
-function createTask() {
+async function createTask(taskObj) {
+    const [task_id] = await db('tasks').insert(taskObj)
+
+    const task = await db('tasks')
+        .where('task_id', task_id)
+        .first()
     
+    const createdTask = {
+        ...task,
+        task_completed: task.task_completed ? true : false
+    }
+
+    return createdTask
 }
 
 module.exports = {
